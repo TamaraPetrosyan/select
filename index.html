@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+   <!-- <div id="container">
+
+   </div> -->
+  <div>
+    <select value="" id="country">
+      <option selected hidden>Select country</option>
+    </select>
+  </div>
+  <div id="cities"></div>
+</body>
+<script>    
+
+//     let div = document.getElementById('container');
+// let select = document.getElementById('select')
+
+
+// let request = new XMLHttpRequest();
+
+// request.open('GET', 'http://localhost:3000/country');
+//   request.send();
+
+// request.onreadystatechange = function () {
+//     if (request.readyState === 4) {
+//       let data = JSON.parse(request.responseText);
+//       console.log(data);
+//       let label = document.createElement('label');
+//       let select = document.createElement('select');
+//       label.innerHTML = 'Choose the country';
+
+
+//       let label1 = document.createElement('label');
+//       let select1 = document.createElement('select');
+//       label1.innerHTML = 'Choose the city';
+   
+//       data.forEach(elem => {
+//         let option = document.createElement('option');
+//         option.innerHTML = elem['name'];
+//         div.append(label);
+//         label.append(select);
+//         select.append(option);
+      
+        
+//         let option1 = document.createElement('option');
+//         option1.innerHTML = elem['city']['name'];
+            
+//             div.append(label1);
+//             label1.append(select1);
+//             select1.append(option1);
+//               console.log(label1);
+       
+        
+//     })
+    
+// }
+// }
+
+let country= document.getElementById('country');
+let list = {};
+function getData(url, callBack){
+  let req = new XMLHttpRequest();
+  req.open('GET', url);
+  req.send();
+  req.onreadystatechange = function(){
+    if(req.readyState === 4){
+      callBack(JSON.parse(req.responseText));
+    }
+  }
+  return req.responseText;
+}
+getData('http://localhost:3000/country', function(data){
+  data.forEach((item,i) => {
+    let option = document.createElement('option');
+    option.innerText = item.name;
+    option.value = item.id;
+    country.append(option);
+    list[item.id] = item.city;
+  });
+  addChangeEvent();
+});
+
+let cities = document.getElementById('cities');
+function addChangeEvent(){
+  country.addEventListener('change', function(e){
+    cities.innerHTML = '';
+    let city = list[e.target.value];
+    let select = document.createElement('select');
+    city.forEach((item,i) => {
+      let option = document.createElement('option');
+      option.innerText = item['name'];
+      select.append(option);
+      
+    })
+    cities.append(select);
+  })
+}
+</script>
+</html> 
+

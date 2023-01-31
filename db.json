@@ -1,0 +1,35 @@
+{
+  "country" : [
+    {
+      "id" : 1,
+      "name" : "Armenia",
+      "city": [
+        {
+          "id" : 1,
+          "name" : "Gyumri"
+        },
+        {
+          "id" : 2,
+          "name" : "Yerevan"
+        }
+      
+      ]
+    },
+    {
+      "id" : 2,
+      "name" : "Russia",
+      "city": [
+        {
+          "id" : 1,
+          "name" : "Moscow"
+        },
+        {
+          "id" : 2,
+          "name" : "Sochi"
+        }
+      
+      ]
+    }
+  ]
+  
+}
